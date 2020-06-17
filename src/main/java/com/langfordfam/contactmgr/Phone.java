@@ -1,31 +1,45 @@
 package com.langfordfam.contactmgr;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.Objects;
 
-@Entity
+/**
+ * Persistable object representing a phone number.
+ */
+@Embeddable
 public class Phone {
-    private @Id
-    @GeneratedValue
-    Long id;    // FIXME prevent id from being mapped to JSON
+
     private String number;
     private String type;
 
-    public Phone() { }
+    public Phone() {
+    }
 
     public Phone(String number, String type) {
         this.number = number;
         this.type = type;
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Phone)) return false;
+        Phone phone = (Phone) o;
+        return number.equals(phone.number) &&
+                type.equals(phone.type);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, type);
+    }
+
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "number='" + number + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 
     public String getNumber() {

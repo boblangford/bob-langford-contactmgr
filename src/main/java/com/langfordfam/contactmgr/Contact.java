@@ -3,19 +3,51 @@ package com.langfordfam.contactmgr;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Persistable object that represents a Contact.
+ */
 @Entity
 public class Contact {
+
     private @Id
-    @GeneratedValue Long id;
+    @GeneratedValue
+    Long id;
+
     @Embedded
     private Name name;
+
     @Embedded
     private Address address;
-    @OneToMany
+
+    @ElementCollection
     private List<Phone> phone;
+
     private String email;
 
-    public Contact() { }
+    public Contact() {
+    }
+
+    /**
+     * Update all data fields of this Contact with data from another Contact.
+     * @param n The Contact that is the source of the new data
+     */
+    public void update(Contact n) {
+        name = n.getName();
+        address = n.getAddress();
+        phone = n.getPhone();
+        email = n.getEmail();
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", name=" + name +
+                ", address=" + address +
+                ", phone=" + phone +
+                ", email='" + email + '\'' +
+                '}';
+    }
 
     public Long getId() {
         return id;

@@ -14,7 +14,7 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(ContactStore repository, PhoneStore phoneRepo) {
+    CommandLineRunner initDatabase(ContactStore repository) {
 
         return args -> {
             Contact c = new Contact();
@@ -24,10 +24,10 @@ public class LoadDatabase {
             c.setEmail("c.c.calhoun@example.com");
             List<Phone> phones = new ArrayList<>();
             p = new Phone("213-456-7890", "home");
-            phoneRepo.save(p);
+//            phoneRepo.save(p);
             phones.add(p);
             p = new Phone("213-987-6541", "mobile");
-            phoneRepo.save(p);
+//            phoneRepo.save(p);
             phones.add(p);
             c.setPhone(phones);
             log.info("Preloading " + repository.save(c));
