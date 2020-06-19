@@ -1,7 +1,9 @@
 package com.langfordfam.contactmgr;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Persistable object that represents a Contact.
@@ -27,6 +29,13 @@ public class Contact {
     public Contact() {
     }
 
+    public Contact(Name name, Address address, String email, Phone... phones) {
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.phone = Arrays.asList(phones);
+    }
+
     /**
      * Update all data fields of this Contact with data from another Contact.
      * @param n The Contact that is the source of the new data
@@ -47,6 +56,22 @@ public class Contact {
                 ", phone=" + phone +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Contact)) return false;
+        Contact contact = (Contact) o;
+        return Objects.equals(name, contact.name) &&
+                Objects.equals(address, contact.address) &&
+                Objects.equals(phone, contact.phone) &&
+                Objects.equals(email, contact.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, address, phone, email);
     }
 
     public Long getId() {

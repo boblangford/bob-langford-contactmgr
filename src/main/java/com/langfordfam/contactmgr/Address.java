@@ -1,8 +1,11 @@
 package com.langfordfam.contactmgr;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
+import java.util.Objects;
 
+/**
+ * Persistable object representing an address.
+ */
 @Embeddable
 public class Address {
     private String street;
@@ -17,6 +20,32 @@ public class Address {
         this.city = city;
         this.state = state;
         this.zip = zip;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip='" + zip + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address)) return false;
+        Address address = (Address) o;
+        return Objects.equals(street, address.street) &&
+                Objects.equals(city, address.city) &&
+                Objects.equals(state, address.state) &&
+                Objects.equals(zip, address.zip);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(street, city, state, zip);
     }
 
     public String getStreet() {

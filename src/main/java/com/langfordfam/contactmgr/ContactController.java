@@ -56,8 +56,16 @@ public class ContactController {
     @PutMapping("/contacts/{id}")
     public Contact updateContact(@RequestBody Contact updatedContact, @PathVariable Long id) {
         log.info("Client updated an existing contact, with ID = " + id);
+        Optional<Contact> result = database.findById(id);
+        if (!result.isPresent()) {
+            log.warn("---> No such contact was found.");
+            throw new NoSuchContactException(id);
+        }
+        Contact existingContact = result.get();
+        existingContact.update(updatedContact);
+        database.save(existingContact);
         return null;
-    }  // TODO implement this
+    }
 
     /**
      * Allows the client to retrieve a single, specific contact by giving the ID number.

@@ -1,0 +1,71 @@
+### List all contacts:
+GET http://localhost:8080/contacts
+Accept: application/json
+
+<> 2020-06-18T100919.200.json
+
+###  Add Harold
+POST http://localhost:8080/contacts
+Accept:  application/json
+Content-Type: application/json
+
+< D:/projects/contactmgr/data/add.harold.json
+
+### List all contacts again (should be two)
+GET http://localhost:8080/contacts
+Accept: application/json
+
+<> 2020-06-18T100919.200.json
+
+###  Update Harold with new info
+PUT http://localhost:8080/contacts/2
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+< D:/projects/contactmgr/data/update.harold.json
+
+###  Show contact #1
+GET http://localhost:8080/contacts/1
+Accept: application/json
+
+<> 2020-06-18T100919.200.json
+
+### Show contact #2
+GET http://localhost:8080/contacts/2
+Accept: application/json
+
+<> 2020-06-18T100919.200.json
+
+###  Show contact #99 (does not exist)
+GET http://localhost:8080/contacts/99
+Accept: application/json
+
+<> 2020-06-18T100919.200.json
+
+###  Delete Harold (#2)
+DELETE http://localhost:8080/contacts/2
+Accept: application/json
+
+<> 2020-06-18T100919.200.json
+
+###  Add Harold again (will be #3)
+POST http://localhost:8080/contacts
+Accept:  application/json
+Content-Type: application/json
+
+< D:/projects/contactmgr/data/add.harold.json
+
+###  Show contact #3
+GET http://localhost:8080/contacts/3
+Accept: application/json
+
+<> 2020-06-18T100919.200.json
+
+###
+### List all contacts again (should be two, numbered 1 and 3)
+GET http://localhost:8080/contacts
+Accept: application/json
+
+<> 2020-06-18T100919.200.json
+

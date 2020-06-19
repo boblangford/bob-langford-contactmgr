@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Loads one contact into the database as a sample entry.
+ */
 @Configuration
 public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
@@ -24,14 +27,11 @@ public class LoadDatabase {
             c.setEmail("c.c.calhoun@example.com");
             List<Phone> phones = new ArrayList<>();
             p = new Phone("213-456-7890", "home");
-//            phoneRepo.save(p);
             phones.add(p);
             p = new Phone("213-987-6541", "mobile");
-//            phoneRepo.save(p);
             phones.add(p);
             c.setPhone(phones);
             log.info("Preloading " + repository.save(c));
-            //log.info("Preloading " + repository.save(new Contact("Betty Barton", "mom")));
         };
     }
 }
